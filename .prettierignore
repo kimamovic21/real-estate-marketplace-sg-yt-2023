@@ -1,0 +1,6 @@
+# Prettier ignore rules
+# Add files or folders you want Prettier to ignore
+.env
+node_modules/
+build/
+dist/
