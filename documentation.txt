@@ -1,0 +1,30 @@
+Real Estate Marketplace
+
+
+Install React and Tailwind CSS
+
+-create Github repository for this project
+-create folder .vscode
+-create files .prettierrc and .prettierignore
+-create documentation.txt file for notes
+-open link: https://react.dev
+-open link: https://nodejs.org/en
+-open link: https://tailwindcss.com/docs/installation/using-vite
+-open link: https://vite.dev/guide
+-open link: https://desktop.github.com/download
+-install VS Code extension ES7_ React/Redux snippets
+-install VS Code extension Auto Rename Tag
+-install VS Code extension Tailwind Intellisense
+-install VS Code extension Console Ninja
+-install VS Code extension Github Copilot Chat
+-install VS Code extension ENV
+-install VS Code extension Code Spell Checker
+-install VS Code extension Git Lens
+-install VS Code extension VS Code Icons
+-install VS Code extension Prettier
+-type command mkdir client
+-type command: cd client
+-type command: npm create vite@latest .
+-update files vite.config.js, postcss.config.js and tailwind.config.js
+-type command: npm run dev
+-open link: http://localhost:5173
