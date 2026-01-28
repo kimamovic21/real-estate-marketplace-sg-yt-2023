@@ -28,3 +28,14 @@ Install React and Tailwind CSS
 -update files vite.config.js, postcss.config.js and tailwind.config.js
 -type command: npm run dev
 -open link: http://localhost:5173
+
+
+Create pages and routes
+
+-open link: https://reactrouter.com/
+-open link: https://www.npmjs.com/package/react-router-dom
+-create folder pages and jsx components
+-type command: cd client
+-type command: npm i react-router-dom
+-in component App.jsx import components from package react-router-dom
+-in jsx add components Route for jsx components
