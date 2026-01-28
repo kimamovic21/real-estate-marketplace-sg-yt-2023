@@ -94,3 +94,15 @@ Connect to Mongo database
 -in index.js file invoke function dotenv.config()
 -type command: npm run dev
 -in .gitignore file add .env
+
+
+Create user model
+
+-open link: https://mongoosejs.com/docs/guide.html
+-open link: https://mongoosejs.com/docs/models.html
+-open link: https://mongoosejs.com/docs/api/model.html
+-open link: https://www.mongodb.com/docs/drivers/node/current/integrations/mongoose/mongoose-get-started/
+-in folder api create folder models and user.model.js file
+-in user.model.js file import mongoose instance
+-create variables const userSchema and const User
+-export variable User as default
