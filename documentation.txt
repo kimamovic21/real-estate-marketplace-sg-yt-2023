@@ -52,3 +52,24 @@ Header component
 -update .eslintrc.cjs file with rule react/prop-types
 -import react icons FaSearch
 -import components from package react-router-dom
+
+
+Express server
+
+-open link: https://expressjs.com/
+-open link: https://www.npmjs.com/package/express
+-type command: npm i express 
+-type command: mkdir api
+-type command: cd api
+-type command: npm init -y
+-in package.json file add type module
+-add scripts and commands dev and start
+-type command: npm i express
+-create index.js file
+-open link: https://www.npmjs.com/package/nodemon
+-open link: https://nodemon.io
+-type command: npm i nodemon --save-dev
+-in index.js file add basic Express setup
+-type command: npm run dev
+-in folder root create .gitignore file for ignoring folder node_modules
+-open link: http://localhost:3000
