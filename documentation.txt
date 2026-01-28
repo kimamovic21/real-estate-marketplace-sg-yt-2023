@@ -94,6 +94,7 @@ Connect to Mongo database
 -in index.js file invoke function dotenv.config()
 -type command: npm run dev
 -in .gitignore file add .env
+-open link: mongodb://localhost:27017/real-estate-marketplace-sg-yt-2023
 
 
 Create user model
@@ -106,3 +107,16 @@ Create user model
 -in user.model.js file import mongoose instance
 -create variables const userSchema and const User
 -export variable User as default
+
+
+Create a test API route
+
+-in index.js file invoke function app.get()
+-create folder routes and user.route.js file
+-in user.route.js file add basic router setup
+-in index.js file import variable userRouter
+-invoke function app.use() for route api/user
+-create folder controllers and user.controller.js
+-in user.controller.js file create and export function test
+-in user.route.ts file import function test
+-invoke function router.get() 
