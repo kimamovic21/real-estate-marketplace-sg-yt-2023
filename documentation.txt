@@ -58,10 +58,10 @@ Express server
 
 -open link: https://expressjs.com/
 -open link: https://www.npmjs.com/package/express
--type command: npm i express 
 -type command: mkdir api
 -type command: cd api
 -type command: npm init -y
+-type command: npm i express 
 -in package.json file add type module
 -add scripts and commands dev and start
 -type command: npm i express
@@ -73,3 +73,24 @@ Express server
 -type command: npm run dev
 -in folder root create .gitignore file for ignoring folder node_modules
 -open link: http://localhost:3000
+
+
+Connect to Mongo database
+
+-open link: https://www.mongodb.com
+-open link: https://www.mongodb.com/products/platform/atlas-database
+-open link: https://www.mongodb.com/products/tools/compass
+-open link: https://mongoosejs.com/
+-open link: https://www.npmjs.com/package/mongoose
+-type command: npm i mongoose
+-create files .env and example.env
+-in .env file create variables PORT and MONGODB_URI
+-in index.js file import mongoose instance
+-invoke function mongoose.connect()
+-create both: cloud and local database
+-open link: https://www.npmjs.com/package/dotenv
+-open link: https://www.dotenv.org
+-type command: npm i dotenv
+-in index.js file invoke function dotenv.config()
+-type command: npm run dev
+-in .gitignore file add .env
