@@ -39,3 +39,16 @@ Create pages and routes
 -type command: npm i react-router-dom
 -in component App.jsx import components from package react-router-dom
 -in jsx add components Route for jsx components
+
+
+Header component
+
+-open link: https://react-icons.github.io/react-icons/
+-open link: https://www.npmjs.com/package/react-icons
+-type command: npm install react-icons
+-in folder src create folder components and component Header.jsx
+-in component App.jsx import component Header
+-in jsx create HTML elements with Tailwind CSS classes
+-update .eslintrc.cjs file with rule react/prop-types
+-import react icons FaSearch
+-import components from package react-router-dom
