@@ -160,3 +160,14 @@ Complete sign up page UI
 
 -in component SignUp.jsx create HTML elements with Tailwind CSS classes
 -open route: http://localhost:5173/sign-up
+
+
+Complete sign up page functionality
+
+-open link: https://reactrouter.com/api/hooks/useNavigate
+-in component SignUp.jsx create state formData and set function setFormData
+-create functions handleChange() and handleSubmit()
+-in jsx add to form element prop onSubmit
+-in vite.config.js file add object server
+-create state variable for for error and loading
+-open route: http://localhost:5173/sign-up and click Sign Up button
