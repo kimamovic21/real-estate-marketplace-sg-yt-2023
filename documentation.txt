@@ -199,3 +199,33 @@ Complete sign in page functionality
 -open route: http://localhost:5173/sign-in and add user info
 -click button Sign In
 -in your browser open option Cookies
+
+
+Add Redux toolkit
+
+-open link: https://redux-toolkit.js.org
+-open link: https://redux-toolkit.js.org/introduction/getting-started
+-open link: https://www.npmjs.com/package/@reduxjs/toolkit
+-open link: https://www.npmjs.com/package/react-redux
+-open link: https://www.npmjs.com/package/redux-persist
+-type command: npm i @reduxjs/toolkit react-redux redux-persist
+-create folder redux and store.js file
+-in store.js file add redux setup
+-in component main.jsx import component Provide and variable store
+-in folder redux create folder user and userSlice.js file
+-in userSlice.js file import function createSlice from package @reduxjs/toolkit
+-create variables const initialState and const userSlice
+-create object reducers
+-in object reducers create functions for auth
+-export functions for auth
+-export variable userSlice.reducer as default
+-in store.js file import variable userReducer
+-in component SignIn.jsx import functions useDispatch and useSelector from package react-redux
+-import auth functions from userSlice.js file
+-in function SignIn() invoke functions useDispatch and useSelector
+-install VS Code extension Redux dev tool
+-open route: http://localhost:5173/sign-in and add wrong credentials
+-open route: http://localhost:5173/sign-in and add user info
+-click button Sign In
+-in your browser open option Cookies
+-open route: http://localhost:5173/profile
