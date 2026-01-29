@@ -138,6 +138,19 @@ Create a sign up API route
 -in auth.controller.js file import model User
 -in function signup() add logic for creating user
 -open link: https://www.npmjs.com/package/bcryptjs
+-open link: https://bcrypt-generator.com
 -type command: npm i bcryptjs
 -open Postman or Insomnia to test endpoint for route signup
 -test endpoint localhost:3000/api/auth/signup with method POST
+
+
+Create a middleware and a function to handle possible errors
+
+-open link: https://expressjs.com/en/guide/error-handling.html
+-in index.js file invoke function app.use() for handling errors
+-in auth.controller.js file update function signup with parameter next
+-in block catch invoke function next(error)
+-create folder utils and error.js file
+-in error.js file create and export function errorHandler()
+-in auth.controller.js file import function errorHandler
+-in block catch invoke function errorHandler()
