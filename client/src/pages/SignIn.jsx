@@ -13,16 +13,19 @@ export default function SignIn() {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       dispatch(signInStart());
+
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
@@ -30,18 +33,21 @@ export default function SignIn() {
         },
         body: JSON.stringify(formData),
       });
+
       const data = await res.json();
-      console.log(data);
+
       if (data.success === false) {
         dispatch(signInFailure(data.message));
         return;
       }
+
       dispatch(signInSuccess(data));
       navigate('/');
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
   };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
@@ -69,12 +75,14 @@ export default function SignIn() {
         </button>
         <OAuth />
       </form>
+
       <div className='flex gap-2 mt-5'>
-        <p>Dont have an account?</p>
+        <p>Don&apos;t have an account?</p>
         <Link to={'/sign-up'}>
           <span className='text-blue-700'>Sign up</span>
         </Link>
       </div>
+
       {error && <p className='text-red-500 mt-5'>{error}</p>}
     </div>
   );

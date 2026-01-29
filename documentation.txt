@@ -186,3 +186,16 @@ Create sign in API route
 -in function signin() add logic for signing
 -open route: http://localhost:5173/sign-up and add user info
 -click button Sign Up
+-open Mongo database to see saved user in collection users
+
+
+
+Complete sign in page functionality
+
+-in component SignIn.jsx create HTML elements with Tailwind CSS classes
+-copy code from component SignUp.jsx
+-open route: http://localhost:5173/sign-up and add user info
+-click button Sign Up
+-open route: http://localhost:5173/sign-in and add user info
+-click button Sign In
+-in your browser open option Cookies
