@@ -154,3 +154,9 @@ Create a middleware and a function to handle possible errors
 -in error.js file create and export function errorHandler()
 -in auth.controller.js file import function errorHandler
 -in block catch invoke function errorHandler()
+
+
+Complete sign up page UI
+
+-in component SignUp.jsx create HTML elements with Tailwind CSS classes
+-open route: http://localhost:5173/sign-up
