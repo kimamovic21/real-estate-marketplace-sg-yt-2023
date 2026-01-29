@@ -229,3 +229,15 @@ Add Redux toolkit
 -click button Sign In
 -in your browser open option Cookies
 -open route: http://localhost:5173/profile
+
+
+Add Redux persist
+
+-open link: https://redux-toolkit.js.org/rtk-query/usage/persistence-and-rehydration
+-in store.js file import functions combineReducers and persistStore
+-create variables const rootReducer, const persistedReducer and const persistor
+-in component main.jsx import component PersistGate from package redux-persist/integration/react
+-open route: http://localhost:5173/sign-in and add user info
+-click button Sign In
+-in your browser open option Cookies
+-open route: http://localhost:5173/profile
