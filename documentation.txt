@@ -170,4 +170,19 @@ Complete sign up page functionality
 -in jsx add to form element prop onSubmit
 -in vite.config.js file add object server
 -create state variable for for error and loading
--open route: http://localhost:5173/sign-up and click Sign Up button
+-open route: http://localhost:5173/sign-up and add user info
+-click button Sign Up button
+
+
+Create sign in API route
+
+-in auth.controller.js file create and export async function signin()
+-in auth.route.js file invoke function router.post() for route /signin
+-open link: https://www.npmjs.com/package/jsonwebtoken
+-open link: https://www.jwt.io
+-type command: npm i jsonwebtoken
+-in auth.controller.js file import instance jwt from package jsonwebtoken
+-in .env file create variable JWT_SECRET
+-in function signin() add logic for signing
+-open route: http://localhost:5173/sign-up and add user info
+-click button Sign Up
