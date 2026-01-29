@@ -111,6 +111,7 @@ Create user model
 
 Create a test API route
 
+-open route: https://expressjs.com/en/guide/routing.html
 -in index.js file invoke function app.get()
 -create folder routes and user.route.js file
 -in user.route.js file add basic router setup
@@ -120,3 +121,23 @@ Create a test API route
 -in user.controller.js file create and export function test
 -in user.route.ts file import function test
 -invoke function router.get() 
+
+
+Create a sign up API route
+
+-in folder routes create auth.route.js file
+-in auth.route.js file 
+-invoke function router.post() for route /signup
+-in folder controllers create auth.controller.js file
+-in auth.controller.js file create and export async function signup()
+-in index.js file invoke function for route /api/auth
+-open link: https://insomnia.rest
+-open link: https://www.postman.com
+-open link: https://expressjs.com/en/guide/using-middleware.html
+-in index.js file invoke function app.use(express.json())
+-in auth.controller.js file import model User
+-in function signup() add logic for creating user
+-open link: https://www.npmjs.com/package/bcryptjs
+-type command: npm i bcryptjs
+-open Postman or Insomnia to test endpoint for route signup
+-test endpoint localhost:3000/api/auth/signup with method POST
