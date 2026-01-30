@@ -182,6 +182,7 @@ Create sign in API route
 -open link: https://www.jwt.io
 -type command: npm i jsonwebtoken
 -in auth.controller.js file import instance jwt from package jsonwebtoken
+-open link: https://jwtsecrets.com
 -in .env file create variable JWT_SECRET
 -in function signin() add logic for signing
 -open route: http://localhost:5173/sign-up and add user info
@@ -316,3 +317,23 @@ Complete image upload functionality (Firebase)
 -import variable app from firebase.js file
 -in jsx add ternary condition for variable fileUploadError 
 -open route: http://localhost:5173/profile and upload image
+
+
+Create update user API route
+
+-open link: https://www.mongodb.com/docs/manual/reference/operator/update/set/
+-in user.controller.js file create and export async function updateUser()
+-in user.route.js file import function updateUser
+-invoke function router.post() for route /update/:id
+-in folder utils create verifyUser.js file
+-in verifyUser.js file create and export async function verifyToken
+-open link: https://expressjs.com/en/resources/middleware/cookie-parser.html
+-open link: https://www.npmjs.com/package/cookie-parser
+-type command: npm i cookie-parser
+-in index.js file import function cookieParser from package cookie-parser
+-invoke function app.use() for function cookieParser()
+-in function verifyUser.js import instance jwt and function errorHandler
+-in function verifyToken() add logic for user verification
+-in user.route.js file import function verifyToken
+-in function router.post() add argument verifyToken
+-open route: http://localhost:5173/profile and update user info
