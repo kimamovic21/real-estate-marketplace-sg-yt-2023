@@ -11,7 +11,7 @@ import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
 
-export default function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Header />
@@ -34,4 +34,6 @@ export default function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
+
+export default App;

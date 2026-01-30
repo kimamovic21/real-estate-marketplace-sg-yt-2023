@@ -1,7 +1,7 @@
-import { FaSearch } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -34,6 +34,7 @@ const Header = () => {
             <span className='text-slate-700'>Estate</span>
           </h1>
         </Link>
+
         <form
           onSubmit={handleSubmit}
           className='bg-slate-100 p-3 rounded-lg flex items-center'
@@ -49,6 +50,7 @@ const Header = () => {
             <FaSearch className='text-slate-600' />
           </button>
         </form>
+
         <ul className='flex gap-4'>
           <Link to='/'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
@@ -68,7 +70,7 @@ const Header = () => {
                 alt='profile'
               />
             ) : (
-              <li className=' text-slate-700 hover:underline'> Sign in</li>
+              <li className=' text-slate-700 hover:underline'>Sign in</li>
             )}
           </Link>
         </ul>

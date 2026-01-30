@@ -205,6 +205,8 @@ Add Redux toolkit
 
 -open link: https://redux-toolkit.js.org
 -open link: https://redux-toolkit.js.org/introduction/getting-started
+-open link: http://react-redux.js.org/api/hooks
+-open link: https://react-redux.js.org/using-react-redux/accessing-store
 -open link: https://www.npmjs.com/package/@reduxjs/toolkit
 -open link: https://www.npmjs.com/package/react-redux
 -open link: https://www.npmjs.com/package/redux-persist
@@ -270,3 +272,20 @@ Add Google OAuth functionality
 -in auth.route.js import function google
 -invoke function router.post() for route /google
 -open route: http://localhost:5173/sign-up and sign up with Google account
+
+
+Update the header and make the profile page private
+
+-create folder public and add favicon.ico logo
+-update index.html 
+-open link: http://localhost:5173/favicon.ico
+-in component Header.jsx import and invoke function useSelector()
+-in jsx add ternary condition for variable currentUser
+-open link: https://reactrouter.com/api/components/Outlet
+-in folder components create component PrivateRoute.jsx
+-in component PrivateRoute.jsx import functions useSelector and useNavigate
+-in component App.jsx import component PrivateRoute
+-in jsx add component Route for component PrivateRoute
+-open route: http://localhost:5173/
+-open local storage and delete user session
+-open route: http://localhost:5173/profile
