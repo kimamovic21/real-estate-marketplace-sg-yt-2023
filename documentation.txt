@@ -289,3 +289,10 @@ Update the header and make the profile page private
 -open route: http://localhost:5173/
 -open local storage and delete user session
 -open route: http://localhost:5173/profile
+
+
+Complete profile page UI
+
+-in component Profile.jsx create HTML elements with Tailwind CSS classes
+-import function useSelector
+-open route: http://localhost:5173/profile

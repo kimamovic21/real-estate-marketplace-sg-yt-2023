@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
@@ -16,9 +17,8 @@ import {
   deleteUserSuccess,
   signOutUserStart,
 } from '../redux/user/userSlice';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-export default function Profile() {
+
+const Profile = () => {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -56,6 +56,7 @@ export default function Profile() {
         setFilePerc(Math.round(progress));
       },
       (error) => {
+        console.error('File upload error:', error);
         setFileUploadError(true);
       },
       () => {
@@ -122,7 +123,7 @@ export default function Profile() {
       }
       dispatch(deleteUserSuccess(data));
     } catch (error) {
-      dispatch(deleteUserFailure(data.message));
+      dispatch(deleteUserFailure(error.message));
     }
   };
 
@@ -290,4 +291,6 @@ export default function Profile() {
       )}
     </div>
   );
-}
+};
+
+export default Profile;
