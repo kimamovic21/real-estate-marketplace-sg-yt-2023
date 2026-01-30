@@ -241,3 +241,32 @@ Add Redux persist
 -click button Sign In
 -in your browser open option Cookies
 -open route: http://localhost:5173/profile
+
+
+Add Google OAuth functionality
+
+-type command: cd client
+-open link: https://www.npmjs.com/package/react-google-button
+-type command: npm i react-google-button
+-in folder components create component OAuth.jsx
+-in component OAuth.jsx import component GoogleButton
+-create function handleGoogleClick()
+-in components SignIn.jsx and SignUp.jsx import component OAuth
+-open link: https://firebase.google.com
+-create Firebase project
+-create web app
+-open link: https://www.npmjs.com/package/firebase
+-type command: npm i firebase
+-in .env file create new variables
+-create firebase.js file
+-in firebase.js file add Firebase setup
+-open Firebase project and option Authentication
+-enable Google auth provider
+-in OAuth.jsx component import functions GoogleAuthProvider, getAuth and signInWithPopup
+-import variable app
+-in function handleGoogleClick() add logic for auth
+-import functions useNavigate, useDispatch and signInSuccess
+-in auth.controller.js file create and export async function google()
+-in auth.route.js import function google
+-invoke function router.post() for route /google
+-open route: http://localhost:5173/sign-up and sign up with Google account
