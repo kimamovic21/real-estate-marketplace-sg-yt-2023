@@ -20,21 +20,18 @@ import {
 
 const Profile = () => {
   const fileRef = useRef(null);
+
   const { currentUser, loading, error } = useSelector((state) => state.user);
+
   const [file, setFile] = useState(undefined);
-  const [filePerc, setFilePerc] = useState(0);
+  const [filePercentage, setFilePercentage] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
-  const dispatch = useDispatch();
 
-  // firebase storage
-  // allow read;
-  // allow write: if
-  // request.resource.size < 2 * 1024 * 1024 &&
-  // request.resource.contentType.matches('image/.*')
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (file) {
@@ -53,7 +50,7 @@ const Profile = () => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setFilePerc(Math.round(progress));
+        setFilePercentage(Math.round(progress));
       },
       (error) => {
         console.error('File upload error:', error);
@@ -183,9 +180,9 @@ const Profile = () => {
             <span className='text-red-700'>
               Error Image upload (image must be less than 2 mb)
             </span>
-          ) : filePerc > 0 && filePerc < 100 ? (
-            <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
-          ) : filePerc === 100 ? (
+          ) : filePercentage > 0 && filePercentage < 100 ? (
+            <span className='text-slate-700'>{`Uploading ${filePercentage}%`}</span>
+          ) : filePercentage === 100 ? (
             <span className='text-green-700'>Image successfully uploaded!</span>
           ) : (
             ''

@@ -119,7 +119,7 @@ Create a test API route
 -invoke function app.use() for route api/user
 -create folder controllers and user.controller.js
 -in user.controller.js file create and export function test
--in user.route.ts file import function test
+-in user.route.js file import function test
 -invoke function router.get() 
 
 
@@ -296,3 +296,23 @@ Complete profile page UI
 -in component Profile.jsx create HTML elements with Tailwind CSS classes
 -import function useSelector
 -open route: http://localhost:5173/profile
+
+
+Complete image upload functionality (Firebase)
+
+-in component Profile create input element with type file
+-import and invoke function useRef()
+-add to img element event onClick
+-open Firebase project and open option Storage
+-create Firebase storage bucket for images
+-update rules
+-create state variables and state functions to handle image upload functionality
+-add to input element event onChange
+-import and invoke function useEffect()
+-create function handleFileUpload()
+-open link: https://www.npmjs.com/package/firebase
+-type command: npm i @firebase/storage
+-import functions from package firebase/storage
+-import variable app from firebase.js file
+-in jsx add ternary condition for variable fileUploadError 
+-open route: http://localhost:5173/profile and upload image
