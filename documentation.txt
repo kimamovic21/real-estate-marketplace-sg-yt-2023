@@ -337,3 +337,13 @@ Create update user API route
 -in user.route.js file import function verifyToken
 -in function router.post() add argument verifyToken
 -open route: http://localhost:5173/profile and update user info
+
+
+Complete update user functionality
+
+-update ui in component Profile.jsx
+-create function handleSubmit()
+-import functions for updating user from userSlice.js file
+-import and invoke function useDispatch()
+-update logic for updating user info
+-open route: http://localhost:5173/profile and update user info
