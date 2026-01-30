@@ -356,3 +356,13 @@ Add delete user functionality
 -invoke function router.delete() for route /delete/:id
 -in component Profile.jsx create async function handleDeleteUser()
 -open route: http://localhost:5173/profile and click button Delete user
+
+
+Add sign out user functionality
+
+-in auth.controller.js file create and export async function signOut()
+-in auth.route.js file import function signOut
+-invoke function router.get() for route /signout
+-in component Profile.jsx create async function handleSignOut()
+-import function signOutUserStart from userSlice.js file
+-open route: http://localhost:5173/profile and click button Sign Out
