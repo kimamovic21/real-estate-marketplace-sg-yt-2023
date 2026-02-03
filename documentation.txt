@@ -379,3 +379,11 @@ Add create listing API route
 -in folder routes create listing.route.js file
 -invoke function router.post() for route /create
 -open Postman and test endpoint localhost:3000/api/listing/create with POST method
+
+
+Complete create listing page UI
+
+-in Profile.jsx, in jsx add component Link for Create Listing
+-in folder pages create component CreateListing.jsx
+-in component CreateListing.jsx create HTML elements with Tailwind CSS classes
+-open route: http://localhost:5173/create-listing

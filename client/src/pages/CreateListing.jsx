@@ -5,11 +5,11 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { app } from '../firebase';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { app } from '../firebase';
 
-export default function CreateListing() {
+const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -31,8 +31,8 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
-  const handleImageSubmit = (e) => {
+
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -41,6 +41,7 @@ export default function CreateListing() {
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
       }
+
       Promise.all(promises)
         .then((urls) => {
           setFormData({
@@ -51,6 +52,7 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((err) => {
+          console.error(err);
           setImageUploadError('Image upload failed (2 mb max per image)');
           setUploading(false);
         });
@@ -142,17 +144,22 @@ export default function CreateListing() {
           userRef: currentUser._id,
         }),
       });
+
       const data = await res.json();
+
       setLoading(false);
+
       if (data.success === false) {
         setError(data.message);
       }
+
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
     }
   };
+
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
@@ -368,4 +375,6 @@ export default function CreateListing() {
       </form>
     </main>
   );
-}
+};
+
+export default CreateListing;
