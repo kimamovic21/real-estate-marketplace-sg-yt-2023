@@ -403,3 +403,16 @@ Complete upload listing images functionality
 -add few images and click button Upload
 -click button Create Listing
 -open Firebase storage bucket to see uploaded images
+
+
+Complete create listing page functionality
+
+-in component CreateListing.jsx update state variable formData
+-add to input elements events onChange and value
+-create functions handleChange() and handleSubmit()
+-invoke functions useSelector() and useNavigate()
+-open route: http://localhost:5173/create-listing
+-add few images and click button Upload
+-click button Create Listing
+-open Firebase storage bucket to see uploaded images
+-open Mongo database to see saved listing

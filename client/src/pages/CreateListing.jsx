@@ -139,6 +139,7 @@ const CreateListing = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           ...formData,
           userRef: currentUser._id,
@@ -151,6 +152,7 @@ const CreateListing = () => {
 
       if (data.success === false) {
         setError(data.message);
+        return;
       }
 
       navigate(`/listing/${data._id}`);
