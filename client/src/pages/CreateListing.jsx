@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { app } from '../firebase';
 
 const CreateListing = () => {

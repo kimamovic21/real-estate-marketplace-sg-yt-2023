@@ -387,3 +387,19 @@ Complete create listing page UI
 -in folder pages create component CreateListing.jsx
 -in component CreateListing.jsx create HTML elements with Tailwind CSS classes
 -open route: http://localhost:5173/create-listing
+
+
+Complete upload listing images functionality
+
+-in component CreateListing.jsx create state for uploading images
+-import functions useState, useSelector and useNavigate
+-add to input element with type file event onChange
+-create function handleImageSubmit()
+-import functions getDownloadURL, getStorage, ref and uploadBytesResumable
+-import variable app
+-create async function storeImage()
+-create HTML elements with Tailwind CSS for displaying uploaded images
+-open route: http://localhost:5173/create-listing
+-add few images and click button Upload
+-click button Create Listing
+-open Firebase storage bucket to see uploaded images
