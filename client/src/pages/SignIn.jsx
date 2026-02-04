@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchAPI } from '../utils/fetchAPI';
 import {
   signInStart,
   signInSuccess,
@@ -26,7 +27,7 @@ const SignIn = () => {
     try {
       dispatch(signInStart());
 
-      const res = await fetch('/api/auth/signin', {
+      const res = await fetchAPI('/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

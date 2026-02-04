@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import { fetchAPI } from '../utils/fetchAPI';
 import SwiperCore from 'swiper';
-import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import 'swiper/css/bundle';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -15,32 +16,32 @@ export default function Home() {
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?offer=true&limit=4');
+        const res = await fetchAPI('/api/listing/get?offer=true&limit=4');
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     const fetchRentListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=rent&limit=4');
+        const res = await fetchAPI('/api/listing/get?type=rent&limit=4');
         const data = await res.json();
         setRentListings(data);
         fetchSaleListings();
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=sale&limit=4');
+        const res = await fetchAPI('/api/listing/get?type=sale&limit=4');
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
-        log(error);
+        console.error(error);
       }
     };
     fetchOfferListings();
@@ -64,7 +65,7 @@ export default function Home() {
           to={'/search'}
           className='text-xs sm:text-sm text-blue-800 font-bold hover:underline'
         >
-          Let's get started...
+          Let&apos;s get started...
         </Link>
       </div>
 
@@ -73,14 +74,13 @@ export default function Home() {
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
-            <SwiperSlide>
+            <SwiperSlide key={listing._id}>
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
                 className='h-[500px]'
-                key={listing._id}
               ></div>
             </SwiperSlide>
           ))}

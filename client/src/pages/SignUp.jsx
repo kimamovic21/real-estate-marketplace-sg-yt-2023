@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { fetchAPI } from '../utils/fetchAPI';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -20,7 +21,7 @@ const SignUp = () => {
     try {
       setLoading(true);
 
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetchAPI('/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

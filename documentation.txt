@@ -432,4 +432,23 @@ Complete show user listings functionality
 -in jsx create button element for displaying all user's listings
 -create state for displaying listings
 -add conditional rendering for displaying listings
--open route: http://localhost:5173/profile and click button Show Listings
+-open route: http://localhost:5173/profile and click button Show 
+
+
+Project deployment & APIs update
+
+-open link: https://vercel.com
+-open link: https://vercel.com/docs/frameworks/backend/express
+-open link: https://www.npmjs.com/package/mongodb
+-type command: npm i mongodb
+-create new project and cluster on Mongo Cloud service
+-open link: https://cloud.mongodb.com
+-in .env file create variable VITE_API_URL
+-create vercel.json file
+-update files vite.config.js and index.js file
+-update variable MONGODB_URI in your backend deployment
+-update variable VITE_API_URL in your frontend deployment
+-create folder utils and fetchAPI.js file
+-in fetchAPI.js file create and export async function fetchAPI()
+-in jsx components import and invoke function fetchAPI()
+-open route: http://localhost:3000/api/test

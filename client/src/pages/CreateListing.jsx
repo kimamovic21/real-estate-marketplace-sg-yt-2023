@@ -8,6 +8,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
+import { fetchAPI } from '../utils/fetchAPI';
 
 const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -134,7 +135,7 @@ const CreateListing = () => {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/listing/create', {
+      const res = await fetchAPI('/api/listing/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
