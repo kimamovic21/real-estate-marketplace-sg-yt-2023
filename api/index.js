@@ -26,19 +26,24 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}!`);
+const port = process.env.PORT || 3000;
+if (process.env.VERCEL !== '1') {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}!`);
+  });
+}
+
+app.get('/api/test', (req, res) => {
+  res.json({
+    message: 'API is healthy!',
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+  });
 });
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
-
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -49,3 +54,5 @@ app.use((err, req, res, next) => {
     message,
   });
 });
+
+export default app;
