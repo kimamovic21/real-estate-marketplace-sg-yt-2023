@@ -424,3 +424,12 @@ Create get user listings API route
 -in user.route.js file import function getUserListings
 -invoke function router.get() for route /listings/:id
 -open Postman and test endpoint localhost:3000/api/user/listings/:id with method GET
+
+
+Complete show user listings functionality
+
+-in component Profile.jsx create async function handleShowListings()
+-in jsx create button element for displaying all user's listings
+-create state for displaying listings
+-add conditional rendering for displaying listings
+-open route: http://localhost:5173/profile and click button Show Listings
