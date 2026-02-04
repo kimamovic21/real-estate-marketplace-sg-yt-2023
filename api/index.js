@@ -24,18 +24,7 @@ const __dirname = path.resolve();
 const app = express();
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'https://real-estate-marketplace-sg-yt-2023-opal.vercel.app',
-      'https://real-estate-marketplace-sg-yt-2023-1p7dhlge9.vercel.app',
-    ];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -57,6 +46,7 @@ app.get('/api/test', (req, res) => {
     message: 'API is healthy!',
     status: 'OK',
     timestamp: new Date().toISOString(),
+    cors: 'enabled',
   });
 });
 

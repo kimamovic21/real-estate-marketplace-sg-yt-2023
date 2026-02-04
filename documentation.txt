@@ -468,3 +468,15 @@ Complete delete user listing functionality
 -in component Profile.jsx create function handleListingDelete()
 -in jsx create button element for deleting listing
 -open route: http://localhost:5173/profile and delete listing
+
+
+Create update listing API route
+
+-update Mongo Atlas database to allow access from everywhere
+-update cors policy to allow access from everywhere
+-in listing.controller.js file create and export async function updateListing()
+-in listing.route.js file import function updateListing
+-invoke function router.post() for route /update/:id
+-open Postman and test endpoint http://localhost:3000/api/listing/update/:id with method POST
+-open route: http://localhost:5173/profile and click button Edit
+-open route: http://localhost:5173/update-listing/:id and update listing
