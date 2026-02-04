@@ -437,6 +437,9 @@ Complete show user listings functionality
 
 Project deployment & APIs update
 
+-open link: https://www.npmjs.com/package/cors
+-type command: npm i cors
+-in index.js file add cors setup
 -open link: https://vercel.com
 -open link: https://vercel.com/docs/frameworks/backend/express
 -open link: https://www.npmjs.com/package/mongodb
@@ -452,3 +455,4 @@ Project deployment & APIs update
 -in fetchAPI.js file create and export async function fetchAPI()
 -in jsx components import and invoke function fetchAPI()
 -open route: http://localhost:3000/api/test
+-open link: https://real-estate-marketplace-sg-yt-2023.vercel.app/api/test

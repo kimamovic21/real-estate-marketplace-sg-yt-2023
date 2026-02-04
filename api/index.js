@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
@@ -22,8 +23,17 @@ const __dirname = path.resolve();
 
 const app = express();
 
-app.use(express.json());
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'https://real-estate-marketplace-sg-yt-2023-opal.vercel.app',
+    'https://real-estate-marketplace-sg-yt-2023-1p7dhlge9.vercel.app',
+  ],
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
+app.use(express.json());
 app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
