@@ -416,3 +416,11 @@ Complete create listing page functionality
 -click button Create Listing
 -open Firebase storage bucket to see uploaded images
 -open Mongo database to see saved listing
+
+
+Create get user listings API route
+
+-in user.controller.js file create and export async function getUserListings()
+-in user.route.js file import function getUserListings
+-invoke function router.get() for route /listings/:id
+-open Postman and test endpoint localhost:3000/api/user/listings/:id with method GET
