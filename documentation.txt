@@ -456,3 +456,15 @@ Project deployment & APIs update
 -in jsx components import and invoke function fetchAPI()
 -open route: http://localhost:3000/api/test
 -open link: https://real-estate-marketplace-sg-yt-2023.vercel.app/api/test
+
+
+Complete delete user listing functionality
+
+-update cors logic in index.js file
+-in listing.controller.js file create and export async function deleteListing()
+-in listing.route.js file import function deleteListing
+-invoke function router.delete() for route /delete/:id
+-open Postman and test endpoint http://localhost:3000/api/listing/delete/:id with method DELETE
+-in component Profile.jsx create function handleListingDelete()
+-in jsx create button element for deleting listing
+-open route: http://localhost:5173/profile and delete listing
