@@ -494,3 +494,14 @@ Complete update listing functionality
 -open Postman and test endpoint http://localhost:3000/api/listing/get/:id with method GET
 -open route: http://localhost:5173/update-listing/:id
 -change listing info and click button Update listing
+
+
+Add image slider to the listing page
+
+-open link: https://www.npmjs.com/package/swiper
+-type command: npm i swiper
+-in folder pages create component Listing.jsx
+-in component Listing.jsx import swiper components 
+-in component Listing.jsx add logic for displaying listing info
+-add more image to the listing
+-open route: http://localhost:5173/listing/:id

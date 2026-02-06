@@ -18,7 +18,7 @@ import 'swiper/css/bundle';
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
-export default function Listing() {
+const Listing = () => {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -150,4 +150,6 @@ export default function Listing() {
       )}
     </main>
   );
-}
+};
+
+export default Listing;
