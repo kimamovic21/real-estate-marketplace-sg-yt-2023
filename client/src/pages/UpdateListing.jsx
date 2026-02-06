@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
@@ -6,11 +8,9 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
 import { fetchAPI } from '../utils/fetchAPI';
 
-export default function CreateListing() {
+const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const params = useParams();
@@ -47,7 +47,7 @@ export default function CreateListing() {
     };
 
     fetchListing();
-  }, []);
+  }, [params.listingId]);
 
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -385,4 +385,6 @@ export default function CreateListing() {
       </form>
     </main>
   );
-}
+};
+
+export default CreateListing;

@@ -480,3 +480,17 @@ Create update listing API route
 -open Postman and test endpoint http://localhost:3000/api/listing/update/:id with method POST
 -open route: http://localhost:5173/profile and click button Edit
 -open route: http://localhost:5173/update-listing/:id and update listing
+
+
+Complete update listing functionality
+
+-in folder pages create component UpdateListing.jsx
+-in component App.jsx import component UpdateListing
+-in component Profile.jsx create button for editing listing
+-copy and update code for editing from component CreateListing.jsx
+-in listing.controller.js file create and export async function getListing()
+-in listing.route.js file import function getListing
+-invoke function router.get() for route /get:id
+-open Postman and test endpoint http://localhost:3000/api/listing/get/:id with method GET
+-open route: http://localhost:5173/update-listing/:id
+-change listing info and click button Update listing
