@@ -1,6 +1,7 @@
 Real Estate Marketplace
 
 
+
 Install React and Tailwind CSS
 
 -create Github repository for this project
@@ -30,6 +31,7 @@ Install React and Tailwind CSS
 -open link: http://localhost:5173
 
 
+
 Create pages and routes
 
 -open link: https://reactrouter.com/
@@ -39,6 +41,7 @@ Create pages and routes
 -type command: npm i react-router-dom
 -in component App.jsx import components from package react-router-dom
 -in jsx add components Route for jsx components
+
 
 
 Header component
@@ -52,6 +55,7 @@ Header component
 -update .eslintrc.cjs file with rule react/prop-types
 -import react icons FaSearch
 -import components from package react-router-dom
+
 
 
 Express server
@@ -73,6 +77,7 @@ Express server
 -type command: npm run dev
 -in folder root create .gitignore file for ignoring folder node_modules
 -open link: http://localhost:3000
+
 
 
 Connect to Mongo database
@@ -97,6 +102,7 @@ Connect to Mongo database
 -open link: mongodb://localhost:27017/real-estate-marketplace-sg-yt-2023
 
 
+
 Create user model
 
 -open link: https://mongoosejs.com/docs/guide.html
@@ -107,6 +113,7 @@ Create user model
 -in user.model.js file import mongoose instance
 -create variables const userSchema and const User
 -export variable User as default
+
 
 
 Create a test API route
@@ -121,6 +128,7 @@ Create a test API route
 -in user.controller.js file create and export function test
 -in user.route.js file import function test
 -invoke function router.get() 
+
 
 
 Create a sign up API route
@@ -144,6 +152,7 @@ Create a sign up API route
 -test endpoint localhost:3000/api/auth/signup with method POST
 
 
+
 Create a middleware and a function to handle possible errors
 
 -open link: https://expressjs.com/en/guide/error-handling.html
@@ -156,10 +165,12 @@ Create a middleware and a function to handle possible errors
 -in block catch invoke function errorHandler()
 
 
+
 Complete sign up page UI
 
 -in component SignUp.jsx create HTML elements with Tailwind CSS classes
 -open route: http://localhost:5173/sign-up
+
 
 
 Complete sign up page functionality
@@ -172,6 +183,7 @@ Complete sign up page functionality
 -create state variable for for error and loading
 -open route: http://localhost:5173/sign-up and add user info
 -click button Sign Up button
+
 
 
 Create sign in API route
@@ -200,6 +212,7 @@ Complete sign in page functionality
 -open route: http://localhost:5173/sign-in and add user info
 -click button Sign In
 -in your browser open option Cookies
+
 
 
 Add Redux toolkit
@@ -234,6 +247,7 @@ Add Redux toolkit
 -open route: http://localhost:5173/profile
 
 
+
 Add Redux persist
 
 -open link: https://redux-toolkit.js.org/rtk-query/usage/persistence-and-rehydration
@@ -244,6 +258,7 @@ Add Redux persist
 -click button Sign In
 -in your browser open option Cookies
 -open route: http://localhost:5173/profile
+
 
 
 Add Google OAuth functionality
@@ -275,6 +290,7 @@ Add Google OAuth functionality
 -open route: http://localhost:5173/sign-up and sign up with Google account
 
 
+
 Update the header and make the profile page private
 
 -create folder public and add favicon.ico logo
@@ -292,11 +308,13 @@ Update the header and make the profile page private
 -open route: http://localhost:5173/profile
 
 
+
 Complete profile page UI
 
 -in component Profile.jsx create HTML elements with Tailwind CSS classes
 -import function useSelector
 -open route: http://localhost:5173/profile
+
 
 
 Complete image upload functionality (Firebase)
@@ -319,6 +337,7 @@ Complete image upload functionality (Firebase)
 -open route: http://localhost:5173/profile and upload image
 
 
+
 Create update user API route
 
 -open link: https://www.mongodb.com/docs/manual/reference/operator/update/set/
@@ -339,14 +358,16 @@ Create update user API route
 -open route: http://localhost:5173/profile and update user info
 
 
+
 Complete update user functionality
 
--update ui in component Profile.jsx
+-update UI in component Profile.jsx
 -create function handleSubmit()
 -import functions for updating user from userSlice.js file
 -import and invoke function useDispatch()
 -update logic for updating user info
 -open route: http://localhost:5173/profile and update user info
+
 
 
 Add delete user functionality
@@ -358,6 +379,7 @@ Add delete user functionality
 -open route: http://localhost:5173/profile and click button Delete user
 
 
+
 Add sign out user functionality
 
 -in auth.controller.js file create and export async function signOut()
@@ -366,6 +388,7 @@ Add sign out user functionality
 -in component Profile.jsx create async function handleSignOut()
 -import function signOutUserStart from userSlice.js file
 -open route: http://localhost:5173/profile and click button Sign Out
+
 
 
 Add create listing API route
@@ -381,12 +404,14 @@ Add create listing API route
 -open Postman and test endpoint localhost:3000/api/listing/create with POST method
 
 
+
 Complete create listing page UI
 
 -in Profile.jsx, in jsx add component Link for Create Listing
 -in folder pages create component CreateListing.jsx
 -in component CreateListing.jsx create HTML elements with Tailwind CSS classes
 -open route: http://localhost:5173/create-listing
+
 
 
 Complete upload listing images functionality
@@ -405,6 +430,7 @@ Complete upload listing images functionality
 -open Firebase storage bucket to see uploaded images
 
 
+
 Complete create listing page functionality
 
 -in component CreateListing.jsx update state variable formData
@@ -418,12 +444,14 @@ Complete create listing page functionality
 -open Mongo database to see saved listing
 
 
+
 Create get user listings API route
 
 -in user.controller.js file create and export async function getUserListings()
 -in user.route.js file import function getUserListings
 -invoke function router.get() for route /listings/:id
 -open Postman and test endpoint localhost:3000/api/user/listings/:id with method GET
+
 
 
 Complete show user listings functionality
@@ -433,6 +461,7 @@ Complete show user listings functionality
 -create state for displaying listings
 -add conditional rendering for displaying listings
 -open route: http://localhost:5173/profile and click button Show 
+
 
 
 Project deployment & APIs update
@@ -458,6 +487,7 @@ Project deployment & APIs update
 -open link: https://real-estate-marketplace-sg-yt-2023.vercel.app/api/test
 
 
+
 Complete delete user listing functionality
 
 -update cors logic in index.js file
@@ -470,6 +500,7 @@ Complete delete user listing functionality
 -open route: http://localhost:5173/profile and delete listing
 
 
+
 Create update listing API route
 
 -update Mongo Atlas database to allow access from everywhere
@@ -480,6 +511,7 @@ Create update listing API route
 -open Postman and test endpoint http://localhost:3000/api/listing/update/:id with method POST
 -open route: http://localhost:5173/profile and click button Edit
 -open route: http://localhost:5173/update-listing/:id and update listing
+
 
 
 Complete update listing functionality
@@ -496,6 +528,7 @@ Complete update listing functionality
 -change listing info and click button Update listing
 
 
+
 Add image slider to the listing page
 
 -open link: https://www.npmjs.com/package/swiper
@@ -504,4 +537,11 @@ Add image slider to the listing page
 -in component Listing.jsx import swiper components 
 -in component Listing.jsx add logic for displaying listing info
 -add more image to the listing
+-open route: http://localhost:5173/listing/:id
+
+
+
+Complete listing page
+
+-update UI in component Listing.jsx
 -open route: http://localhost:5173/listing/:id
