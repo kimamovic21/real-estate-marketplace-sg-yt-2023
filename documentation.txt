@@ -579,3 +579,13 @@ Complete header search form functionality
 -create function handleSubmit
 -in jsx add to form element event onSubmit
 -open route: http://localhost:5173 and search for a listing
+
+
+
+Create search page UI
+
+-create component Search.jsx
+-in component App.jsx import component Search
+-in folder components create component ListingItem.jsx
+-in component Search.jsx import component ListingItem
+-in jsx create HTML elements with Tailwind CSS classes

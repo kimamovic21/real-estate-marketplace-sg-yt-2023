@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { fetchAPI } from '../utils/fetchAPI';
 import ListingItem from '../components/ListingItem';
 
-export default function Search() {
+const Search = () => {
   const navigate = useNavigate();
-  const [sidebardata, setSidebardata] = useState({
+  const [sidebarData, setSidebarData] = useState({
     searchTerm: '',
     type: 'all',
     parking: false,
@@ -38,7 +38,7 @@ export default function Search() {
       sortFromUrl ||
       orderFromUrl
     ) {
-      setSidebardata({
+      setSidebarData({
         searchTerm: searchTermFromUrl || '',
         type: typeFromUrl || 'all',
         parking: parkingFromUrl === 'true' ? true : false,
@@ -52,14 +52,17 @@ export default function Search() {
     const fetchListings = async () => {
       setLoading(true);
       setShowMore(false);
+
       const searchQuery = urlParams.toString();
       const res = await fetchAPI(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
+
       if (data.length > 8) {
         setShowMore(true);
       } else {
         setShowMore(false);
       }
+
       setListings(data);
       setLoading(false);
     };
@@ -73,11 +76,11 @@ export default function Search() {
       e.target.id === 'rent' ||
       e.target.id === 'sale'
     ) {
-      setSidebardata({ ...sidebardata, type: e.target.id });
+      setSidebarData({ ...sidebarData, type: e.target.id });
     }
 
     if (e.target.id === 'searchTerm') {
-      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
+      setSidebarData({ ...sidebarData, searchTerm: e.target.value });
     }
 
     if (
@@ -85,8 +88,8 @@ export default function Search() {
       e.target.id === 'furnished' ||
       e.target.id === 'offer'
     ) {
-      setSidebardata({
-        ...sidebardata,
+      setSidebarData({
+        ...sidebarData,
         [e.target.id]:
           e.target.checked || e.target.checked === 'true' ? true : false,
       });
@@ -97,20 +100,22 @@ export default function Search() {
 
       const order = e.target.value.split('_')[1] || 'desc';
 
-      setSidebardata({ ...sidebardata, sort, order });
+      setSidebarData({ ...sidebarData, sort, order });
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const urlParams = new URLSearchParams();
-    urlParams.set('searchTerm', sidebardata.searchTerm);
-    urlParams.set('type', sidebardata.type);
-    urlParams.set('parking', sidebardata.parking);
-    urlParams.set('furnished', sidebardata.furnished);
-    urlParams.set('offer', sidebardata.offer);
-    urlParams.set('sort', sidebardata.sort);
-    urlParams.set('order', sidebardata.order);
+    urlParams.set('searchTerm', sidebarData.searchTerm);
+    urlParams.set('type', sidebarData.type);
+    urlParams.set('parking', sidebarData.parking);
+    urlParams.set('furnished', sidebarData.furnished);
+    urlParams.set('offer', sidebarData.offer);
+    urlParams.set('sort', sidebarData.sort);
+    urlParams.set('order', sidebarData.order);
+
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -119,13 +124,18 @@ export default function Search() {
     const numberOfListings = listings.length;
     const startIndex = numberOfListings;
     const urlParams = new URLSearchParams(location.search);
+
     urlParams.set('startIndex', startIndex);
+
     const searchQuery = urlParams.toString();
+
     const res = await fetchAPI(`/api/listing/get?${searchQuery}`);
     const data = await res.json();
+
     if (data.length < 9) {
       setShowMore(false);
     }
+
     setListings([...listings, ...data]);
   };
   return (
@@ -141,7 +151,7 @@ export default function Search() {
               id='searchTerm'
               placeholder='Search...'
               className='border rounded-lg p-3 w-full'
-              value={sidebardata.searchTerm}
+              value={sidebarData.searchTerm}
               onChange={handleChange}
             />
           </div>
@@ -153,7 +163,7 @@ export default function Search() {
                 id='all'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'all'}
+                checked={sidebarData.type === 'all'}
               />
               <span>Rent & Sale</span>
             </div>
@@ -163,7 +173,7 @@ export default function Search() {
                 id='rent'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'rent'}
+                checked={sidebarData.type === 'rent'}
               />
               <span>Rent</span>
             </div>
@@ -173,7 +183,7 @@ export default function Search() {
                 id='sale'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'sale'}
+                checked={sidebarData.type === 'sale'}
               />
               <span>Sale</span>
             </div>
@@ -183,7 +193,7 @@ export default function Search() {
                 id='offer'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.offer}
+                checked={sidebarData.offer}
               />
               <span>Offer</span>
             </div>
@@ -196,7 +206,7 @@ export default function Search() {
                 id='parking'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.parking}
+                checked={sidebarData.parking}
               />
               <span>Parking</span>
             </div>
@@ -206,7 +216,7 @@ export default function Search() {
                 id='furnished'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.furnished}
+                checked={sidebarData.furnished}
               />
               <span>Furnished</span>
             </div>
@@ -262,4 +272,6 @@ export default function Search() {
       </div>
     </div>
   );
-}
+};
+
+export default Search;
