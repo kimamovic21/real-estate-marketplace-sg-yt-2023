@@ -545,3 +545,19 @@ Complete listing page
 
 -update UI in component Listing.jsx
 -open route: http://localhost:5173/listing/:id
+
+
+
+Add contact landlord functionality to the listing page
+
+-in component Listing.jsx add ternary condition for button element for contacting landlord
+-in user.controller.js file create and export async function getUser()
+-in user.route.js file import function getUser
+-invoke function router.get() for route /:id
+-create component Contact.jsx
+-in component Contact.jsx add logic for contacting landlord
+-in component App.jsx import component Contact
+-sign up with another user with gmail
+-open route: http://localhost:5173/listing/:id
+-click button Contact landlord
+-open Outlook and send email to the user who created listing

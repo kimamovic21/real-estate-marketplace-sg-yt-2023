@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAPI } from '../utils/fetchAPI';
 
-export default function Contact({ listing }) {
+const Contact = ({ listing }) => {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState('');
 
@@ -52,4 +52,6 @@ export default function Contact({ listing }) {
       )}
     </>
   );
-}
+};
+
+export default Contact;
