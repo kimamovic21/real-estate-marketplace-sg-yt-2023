@@ -570,3 +570,12 @@ Create search API route
 -in listing.route.js import function getListings
 -invoke function router.get() for function getListings
 -open Postman and test endpoint localhost:3000/api/listing/get with method GET
+
+
+
+Complete header search form functionality
+
+-in component Header.jsx add state for searching a listing
+-create function handleSubmit
+-in jsx add to form element event onSubmit
+-open route: http://localhost:5173 and search for a listing
