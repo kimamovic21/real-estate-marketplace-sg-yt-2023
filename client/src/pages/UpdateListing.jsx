@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   getDownloadURL,
   getStorage,
   ref,
+  deleteObject,
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
@@ -14,7 +15,11 @@ const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const params = useParams();
+  const maxImageSize = 2 * 1024 * 1024;
   const [files, setFiles] = useState([]);
+  const [localImages, setLocalImages] = useState([]);
+  const localImagesRef = useRef([]);
+  const [removedImageUrls, setRemovedImageUrls] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
     name: '',
@@ -34,6 +39,31 @@ const CreateListing = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const formatBytes = (bytes) => {
+    if (!Number.isFinite(bytes)) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB'];
+    let size = bytes;
+    let unitIndex = 0;
+    while (size >= 1024 && unitIndex < units.length - 1) {
+      size /= 1024;
+      unitIndex += 1;
+    }
+    const precision = size >= 100 || unitIndex === 0 ? 0 : 1;
+    return `${size.toFixed(precision)} ${units[unitIndex]}`;
+  };
+
+  useEffect(() => {
+    localImagesRef.current = localImages;
+  }, [localImages]);
+
+  useEffect(() => {
+    return () => {
+      localImagesRef.current.forEach((image) =>
+        URL.revokeObjectURL(image.previewUrl)
+      );
+    };
+  }, []);
+
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
@@ -44,41 +74,70 @@ const CreateListing = () => {
         return;
       }
       setFormData(data);
+      setRemovedImageUrls([]);
     };
 
     fetchListing();
   }, [params.listingId]);
 
-  const handleImageSubmit = () => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
-      setUploading(true);
-      setImageUploadError(false);
-      const promises = [];
+  const getStoragePathFromUrl = (url) => {
+    try {
+      const parsed = new URL(url);
+      const pathname = parsed.pathname;
+      const marker = '/o/';
+      const markerIndex = pathname.indexOf(marker);
+      if (markerIndex === -1) return null;
+      const encodedPath = pathname.slice(markerIndex + marker.length);
+      return decodeURIComponent(encodedPath);
+    } catch (parseError) {
+      console.warn('Invalid storage URL.', parseError);
+      return null;
+    }
+  };
 
-      for (let i = 0; i < files.length; i++) {
-        promises.push(storeImage(files[i]));
-      }
-      Promise.all(promises)
-        .then((urls) => {
-          setFormData({
-            ...formData,
-            imageUrls: formData.imageUrls.concat(urls),
-          });
-          setImageUploadError(false);
-          setUploading(false);
-        })
-        .catch((err) => {
-          console.error(err);
-          setImageUploadError('Image upload failed (2 mb max per image)');
-          setUploading(false);
-        });
+  const deleteImagesFromStorage = async (urls) => {
+    if (urls.length === 0) return;
+    const storage = getStorage(app);
+    const deletions = urls.map((url) => {
+      const storagePath = getStoragePathFromUrl(url);
+      if (!storagePath) return Promise.resolve();
+      return deleteObject(ref(storage, storagePath));
+    });
+
+    const results = await Promise.allSettled(deletions);
+    const failures = results.filter((result) => result.status === 'rejected');
+    if (failures.length > 0) {
+      console.warn('Some images failed to delete from storage.', failures);
+      setError('Some images could not be deleted from storage.');
+    }
+  };
+
+  const handleImageSubmit = () => {
+    const oversizedFiles = files.filter((file) => file.size > maxImageSize);
+    if (oversizedFiles.length > 0) {
+      setImageUploadError('Each image must be 2 MB or less');
+    }
+    const allowedFiles = files.filter((file) => file.size <= maxImageSize);
+    if (
+      allowedFiles.length > 0 &&
+      allowedFiles.length + formData.imageUrls.length + localImages.length < 7
+    ) {
+      const newImages = allowedFiles.map((file) => ({
+        file,
+        previewUrl: URL.createObjectURL(file),
+      }));
+      setLocalImages((prev) => prev.concat(newImages));
+      setFiles([]);
+      setImageUploadError(false);
     } else {
       setImageUploadError('You can only upload 6 images per listing');
-      setUploading(false);
     }
   };
 
   const storeImage = async (file) => {
+    if (file.size > maxImageSize) {
+      throw new Error('Each image must be 2 MB or less');
+    }
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
@@ -104,9 +163,24 @@ const CreateListing = () => {
   };
 
   const handleRemoveImage = (index) => {
+    const urlToRemove = formData.imageUrls[index];
     setFormData({
       ...formData,
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+    });
+    if (urlToRemove) {
+      setRemovedImageUrls((prev) => prev.concat(urlToRemove));
+    }
+  };
+
+  const handleRemoveLocalImage = (index) => {
+    setLocalImages((prev) => {
+      const next = [...prev];
+      const [removed] = next.splice(index, 1);
+      if (removed?.previewUrl) {
+        URL.revokeObjectURL(removed.previewUrl);
+      }
+      return next;
     });
   };
 
@@ -144,12 +218,20 @@ const CreateListing = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.imageUrls.length < 1)
+      const totalImages = formData.imageUrls.length + localImages.length;
+      if (totalImages < 1)
         return setError('You must upload at least one image');
       if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
+      setUploading(true);
+
+      const uploadedUrls = await Promise.all(
+        localImages.map((image) => storeImage(image.file))
+      );
+      const imageUrls = formData.imageUrls.concat(uploadedUrls);
+
       const res = await fetchAPI(`/api/listing/update/${params.listingId}`, {
         method: 'POST',
         headers: {
@@ -157,18 +239,30 @@ const CreateListing = () => {
         },
         body: JSON.stringify({
           ...formData,
+          imageUrls,
           userRef: currentUser._id,
         }),
       });
       const data = await res.json();
       setLoading(false);
+      setUploading(false);
+
+      localImages.forEach((image) => URL.revokeObjectURL(image.previewUrl));
+      setLocalImages([]);
+
       if (data.success === false) {
         setError(data.message);
+        return;
       }
+
+      await deleteImagesFromStorage(removedImageUrls);
+      setRemovedImageUrls([]);
+
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
+      setUploading(false);
     }
   };
   return (
@@ -333,9 +427,14 @@ const CreateListing = () => {
               The first image will be the cover (max 6)
             </span>
           </p>
+          {localImages.length > 0 && (
+            <p className='text-sm text-gray-600'>
+              Pending upload: {localImages.length}
+            </p>
+          )}
           <div className='flex gap-4'>
             <input
-              onChange={(e) => setFiles(e.target.files)}
+              onChange={(e) => setFiles(Array.from(e.target.files || []))}
               className='p-3 border border-gray-300 rounded w-full'
               type='file'
               id='images'
@@ -368,6 +467,31 @@ const CreateListing = () => {
                 <button
                   type='button'
                   onClick={() => handleRemoveImage(index)}
+                  className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          {localImages.length > 0 &&
+            localImages.map((image, index) => (
+              <div
+                key={image.previewUrl}
+                className='flex justify-between p-3 border items-center'
+              >
+                <div className='flex items-center gap-3'>
+                  <img
+                    src={image.previewUrl}
+                    alt='listing preview'
+                    className='w-20 h-20 object-contain rounded-lg'
+                  />
+                  <span className='text-xs text-gray-500'>
+                    {formatBytes(image.file?.size)}
+                  </span>
+                </div>
+                <button
+                  type='button'
+                  onClick={() => handleRemoveLocalImage(index)}
                   className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
                 >
                   Delete

@@ -598,3 +598,10 @@ Add onChange and onSubmit functionality to the search page
 -create functions handleChange() and handleSubmit()
 -add logic for searching listing
 -open route: http://localhost:5173 and search for a listing
+
+
+
+Firebase image upload update
+
+-update components Update Listing.jsx and CreateListing.jsx
+-open route: http://localhost:5173/create-listing and create new listing with images

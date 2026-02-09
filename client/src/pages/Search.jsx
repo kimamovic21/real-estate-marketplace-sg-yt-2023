@@ -5,6 +5,7 @@ import ListingItem from '../components/ListingItem';
 
 const Search = () => {
   const navigate = useNavigate();
+
   const [sidebarData, setSidebarData] = useState({
     searchTerm: '',
     type: 'all',
