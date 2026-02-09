@@ -561,3 +561,12 @@ Add contact landlord functionality to the listing page
 -open route: http://localhost:5173/listing/:id
 -click button Contact landlord
 -open Outlook and send email to the user who created listing
+
+
+
+Create search API route
+
+-in listing.controller.js file create and export async function getListings()
+-in listing.route.js import function getListings
+-invoke function router.get() for function getListings
+-open Postman and test endpoint localhost:3000/api/listing/get with method GET
