@@ -589,3 +589,12 @@ Create search page UI
 -in folder components create component ListingItem.jsx
 -in component Search.jsx import component ListingItem
 -in jsx create HTML elements with Tailwind CSS classes
+
+
+
+Add onChange and onSubmit functionality to the search page
+
+-in component Search.jsx create state variable sidebarData and set function setSidebarData
+-create functions handleChange() and handleSubmit()
+-add logic for searching listing
+-open route: http://localhost:5173 and search for a listing
