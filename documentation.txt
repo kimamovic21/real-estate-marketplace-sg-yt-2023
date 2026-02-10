@@ -613,3 +613,11 @@ Create the listing item component and show listings
 -in component ListingItem.jsx create HTML elements with Tailwind CSS classes
 -update tailwind.config.js file
 -open route: http://localhost:5173/search and search listing
+
+
+
+Add show more listings functionality
+
+-in component Search.jsx add logic for showing more listings
+-create more then nine listings
+-open route: http://localhost:5173/search and click button View more
