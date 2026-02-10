@@ -9,6 +9,21 @@ import {
 } from 'firebase/storage';
 import { app } from '../firebase';
 import { fetchAPI } from '../utils/fetchAPI';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import DraggableImage from '../components/DraggableImageList';
 
 const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -127,6 +142,38 @@ const CreateListing = () => {
       }
       return next;
     });
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEndUploaded = (event) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setFormData((prev) => {
+        const oldIndex = prev.imageUrls.findIndex((url) => url === active.id);
+        const newIndex = prev.imageUrls.findIndex((url) => url === over.id);
+        return {
+          ...prev,
+          imageUrls: arrayMove(prev.imageUrls, oldIndex, newIndex),
+        };
+      });
+    }
+  };
+
+  const handleDragEndLocal = (event) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setLocalImages((prev) => {
+        const oldIndex = prev.findIndex((img) => img.previewUrl === active.id);
+        const newIndex = prev.findIndex((img) => img.previewUrl === over.id);
+        return arrayMove(prev, oldIndex, newIndex);
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -400,51 +447,55 @@ const CreateListing = () => {
           <p className='text-red-700 text-sm'>
             {imageUploadError && imageUploadError}
           </p>
-          {formData.imageUrls.length > 0 &&
-            formData.imageUrls.map((url, index) => (
-              <div
-                key={url}
-                className='flex justify-between p-3 border items-center'
+          {formData.imageUrls.length > 0 && (
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEndUploaded}
+            >
+              <SortableContext
+                items={formData.imageUrls}
+                strategy={verticalListSortingStrategy}
               >
-                <img
-                  src={url}
-                  alt='listing image'
-                  className='w-20 h-20 object-contain rounded-lg'
-                />
-                <button
-                  type='button'
-                  onClick={() => handleRemoveImage(index)}
-                  className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          {localImages.length > 0 &&
-            localImages.map((image, index) => (
-              <div
-                key={image.previewUrl}
-                className='flex justify-between p-3 border items-center'
-              >
-                <div className='flex items-center gap-3'>
-                  <img
-                    src={image.previewUrl}
-                    alt='listing preview'
-                    className='w-20 h-20 object-contain rounded-lg'
+                {formData.imageUrls.map((url, index) => (
+                  <DraggableImage
+                    key={url}
+                    id={url}
+                    url={url}
+                    index={index}
+                    onRemove={() => handleRemoveImage(index)}
+                    formatBytes={formatBytes}
+                    isLocal={false}
                   />
-                  <span className='text-xs text-gray-500'>
-                    {formatBytes(image.file?.size)}
-                  </span>
-                </div>
-                <button
-                  type='button'
-                  onClick={() => handleRemoveLocalImage(index)}
-                  className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
+                ))}
+              </SortableContext>
+            </DndContext>
+          )}
+          {localImages.length > 0 && (
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEndLocal}
+            >
+              <SortableContext
+                items={localImages.map((img) => img.previewUrl)}
+                strategy={verticalListSortingStrategy}
+              >
+                {localImages.map((image, index) => (
+                  <DraggableImage
+                    key={image.previewUrl}
+                    id={image.previewUrl}
+                    url={image.previewUrl}
+                    index={index}
+                    onRemove={() => handleRemoveLocalImage(index)}
+                    formatBytes={formatBytes}
+                    fileSize={image.file?.size}
+                    isLocal={true}
+                  />
+                ))}
+              </SortableContext>
+            </DndContext>
+          )}
           <button
             disabled={loading || uploading}
             className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
