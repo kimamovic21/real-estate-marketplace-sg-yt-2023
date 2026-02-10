@@ -635,3 +635,12 @@ Add drag-and-drop image reordering
 -update components CreateListing.jsx and UpdateListing.jsx with dnd kit logic
 -open route: http://localhost:5173/create-listing
 -open route: http://localhost:5173/update-listing/:id
+
+
+
+Complete Home page
+
+-in component Home.jsx create HTML elements with Tailwind CSS classes
+-add logic for fetching listings
+-add components from package swiper
+-open route: http://localhost:5173 to see listings

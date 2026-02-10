@@ -7,12 +7,13 @@ import SwiperCore from 'swiper';
 import ListingItem from '../components/ListingItem';
 import 'swiper/css/bundle';
 
-export default function Home() {
+const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
+
   SwiperCore.use([Navigation]);
-  console.log(offerListings);
+
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -24,6 +25,7 @@ export default function Home() {
         console.error(error);
       }
     };
+
     const fetchRentListings = async () => {
       try {
         const res = await fetchAPI('/api/listing/get?type=rent&limit=4');
@@ -46,6 +48,7 @@ export default function Home() {
     };
     fetchOfferListings();
   }, []);
+
   return (
     <div>
       {/* top */}
@@ -56,8 +59,7 @@ export default function Home() {
           place with ease
         </h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
-          Sahand Estate is the best place to find your next perfect place to
-          live.
+          Real Estate is the best place to find your next perfect place to live.
           <br />
           We have a wide range of properties for you to choose from.
         </div>
@@ -152,4 +154,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;

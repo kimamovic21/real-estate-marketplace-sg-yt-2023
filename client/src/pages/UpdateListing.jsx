@@ -85,7 +85,6 @@ const CreateListing = () => {
       const res = await fetchAPI(`/api/listing/get/${listingId}`);
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setFormData(data);
