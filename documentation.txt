@@ -621,3 +621,17 @@ Add show more listings functionality
 -in component Search.jsx add logic for showing more listings
 -create more then nine listings
 -open route: http://localhost:5173/search and click button View more
+
+
+
+Add drag-and-drop image reordering
+
+-install dnd packages for images reordering
+-open link: https://www.npmjs.com/package/@dnd-kit/core
+-open link: https://www.npmjs.com/package/@dnd-kit/sortable
+-open link: https://www.npmjs.com/package/@dnd-kit/utilities
+-type command: npm i @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+-in folder components create component DraggableImageList.jsx
+-update components CreateListing.jsx and UpdateListing.jsx with dnd kit logic
+-open route: http://localhost:5173/create-listing
+-open route: http://localhost:5173/update-listing/:id
