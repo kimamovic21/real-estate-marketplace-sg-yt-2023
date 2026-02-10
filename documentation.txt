@@ -644,3 +644,10 @@ Complete Home page
 -add logic for fetching listings
 -add components from package swiper
 -open route: http://localhost:5173 to see listings
+
+
+
+Complete About page
+
+-in component About.jsx create HTML elements with Tailwind CSS classes
+-open route: http://localhost:5173/about
