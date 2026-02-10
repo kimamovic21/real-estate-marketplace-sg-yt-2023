@@ -605,3 +605,11 @@ Firebase image upload update
 
 -update components Update Listing.jsx and CreateListing.jsx
 -open route: http://localhost:5173/create-listing and create new listing with images
+
+
+
+Create the listing item component and show listings
+
+-in component ListingItem.jsx create HTML elements with Tailwind CSS classes
+-update tailwind.config.js file
+-open route: http://localhost:5173/search and search listing
