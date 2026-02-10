@@ -651,3 +651,11 @@ Complete About page
 
 -in component About.jsx create HTML elements with Tailwind CSS classes
 -open route: http://localhost:5173/about
+
+
+
+Add documentation and project config files
+
+-create files README.md with project overview
+-create files AGENTS.md and Claude.md with instructions
+-create configuration files
